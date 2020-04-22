@@ -7,11 +7,11 @@
     <body>
         <div class="back"></div>
         <div class="container">
-            <div class="display">69420</div>
+            <div class="display"></div>
             <div class="topb">
-                <div class="top butt">AC</div>
-                <div class="top butt">+/-</div>
-                <div class="top butt">%</div>
+                <div class="top butt clear">AC</div>
+                <div class="top butt del">del</div>
+                <div class="top butt percent">%</div>
             </div>
             <div class="operatorb">
                 <div class="op butt" id="division">/</div>
@@ -34,5 +34,54 @@
                 <div class="num butt">.</div>
             </div>
         </div>
+    <script>
+        const dip = document.querySelector(".display");
+        function display(){
+            if(this.textContent == ".")
+                if(dip.textContent.indexOf(".") == -1)
+                    dip.textContent = dip.textContent + this.textContent;
+                else
+                    console.log("Error: Cannot add more than (1) Decimal Point in Calculator");
+            else
+                dip.textContent = dip.textContent + this.textContent;
+        }
+        function clear(){
+            dip.textContent= "";
+        }
+        function del(){
+            dip.textContent = dip.textContent.substring(0,dip.textContent.length - 1);
+        }
+        function operation(){
+            let first = Number(dip.textContent);
+            del()
+            let operator = this.textContent;
+        }
+        function equal(){
+            let second = Number(dip.textContent);
+            if(dip.textContent = "")
+                console.log("Can't do an operator with nothing!");
+            else
+                if(operator == "+")
+                    dip.textContent = first + second;
+                else if(operator == "-")
+                    dip.textContent = first - second;
+                else if(operator == "*")
+                    dip.textContent = first * second;
+                else if(operator == "/")
+                {
+                    console.log("here");
+                    let val = first/second;
+                    dip.textContent = val.toFixed(2);
+                }
+        }
+        const nums = document.querySelectorAll(".num");
+        const clr = document.querySelector(".clear");
+        const dels = document.querySelector(".del");
+        const ops = document.querySelectorAll(".op");
+        nums.forEach(num => num.addEventListener("click", display));
+        ops.forEach(op => op.addEventListener("click", operation));
+        clr.addEventListener("click", clear);
+        dels.addEventListener("click", del);
+    </script>
     </body>
 </html>
