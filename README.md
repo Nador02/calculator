@@ -1,0 +1,1 @@
+This is a calculator website project that I created using Javascript, HTML, and CSS. It involves 4 function of whole numbers and decimals, and can do functions such as clear and delete single numbers/symbols. It is my first major web dev project so I hope anybody who is looking at this is able to see my growth from here forward :).
