@@ -35,7 +35,16 @@
             </div>
         </div>
     <script>
+        let operator = 0;
+        let first = 0;
         const dip = document.querySelector(".display");
+        const nums = document.querySelectorAll(".num");
+        const clr = document.querySelector(".clear");
+        const dels = document.querySelector(".del");
+        const ops = document.querySelectorAll(".op");
+        const per = document.querySelector(".percent");
+        const back = document.querySelector(".back");
+        let currentOp = document.querySelector("div");
         function display(){
             if(this.textContent == ".")
                 if(dip.textContent.indexOf(".") == -1)
@@ -47,14 +56,25 @@
         }
         function clear(){
             dip.textContent= "";
+            back.style.backgroundColor = "#fed8b1";
         }
         function del(){
             dip.textContent = dip.textContent.substring(0,dip.textContent.length - 1);
         }
         function operation(){
-            let first = Number(dip.textContent);
-            del()
-            let operator = this.textContent;
+            if(this.textContent == "=")
+            {
+                equal();
+                current.classList.remove("trans");
+            }
+            else
+            {
+                first = Number(dip.textContent);
+                clear();
+                operator = this.textContent;
+                this.classList.add("trans");
+                current = this;
+            }
         }
         function equal(){
             let second = Number(dip.textContent);
@@ -69,19 +89,28 @@
                     dip.textContent = first * second;
                 else if(operator == "/")
                 {
+                    if(second != 0)
+                    {
                     console.log("here");
                     let val = first/second;
                     dip.textContent = val.toFixed(2);
+                    }
+                    else
+                    {
+                        dip.textContent = "NO / BY 0 >:(";
+                        back.style.backgroundColor = "red";
+                    }
+
                 }
         }
-        const nums = document.querySelectorAll(".num");
-        const clr = document.querySelector(".clear");
-        const dels = document.querySelector(".del");
-        const ops = document.querySelectorAll(".op");
+        function percent(){
+            dip.textContent = Number(dip.textContent)/100;
+        }
         nums.forEach(num => num.addEventListener("click", display));
         ops.forEach(op => op.addEventListener("click", operation));
         clr.addEventListener("click", clear);
         dels.addEventListener("click", del);
+        per.addEventListener("click", percent);
     </script>
     </body>
 </html>
